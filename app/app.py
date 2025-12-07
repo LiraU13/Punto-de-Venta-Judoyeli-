@@ -442,6 +442,35 @@ def generar_reporte_ventas():
         """)
         ventas = g.cursor.fetchall()
 
+        if not ventas:
+             # Logic to show alert on principal page if no sales
+             script = """
+                <script>
+                    Swal.fire({
+                        title: 'Sin Ventas',
+                        text: 'No hay historial de ventas registrado aún.',
+                        icon: 'info',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Entendido'
+                    });
+                </script>
+            """
+             # Reuse principal logic to render the page with the script
+             # Copying needed logic from 'principal' route (user_id check is already handled by auth middleware or session, but here we are in a route)
+             # Actually, simpler is to redirect to principal with a flash, but user asked for "alerta".
+             # Flash is standard, but let's try to pass the script to principal.
+             # Re-fetching principal data to render it:
+             if 'user_id' in session:
+                user_id = session.get('user_id')
+                g.cursor.execute("SELECT nombre_usuario FROM usuario WHERE id = ?", (user_id,))
+                user = g.cursor.fetchone()
+                nombre_usuario = user[0] if user else "Usuario Desconocido"
+                menu_acciones = ['Agregar Productos', 'Agregar Categorías', 'Agregar Venta', 'Editar Productos', 'Editar Categorías', 'Buscar Productos', 'Subir Productos(Excel)','Productos Existentes..(PDF)', 'Historial de Ventas..(PDF)', 'Productos Caducados..(PDF)']
+                fecha_actual = datetime.now().strftime('%Y-%m-%d')
+                return render_template('principal.html', acciones=menu_acciones, nombre_usuario=nombre_usuario, fecha_actual=fecha_actual, script=script)
+             else:
+                 return redirect('/')
+
         # Crear el documento PDF
         buffer = BytesIO()
         doc = SimpleDocTemplate(buffer, pagesize=letter)
