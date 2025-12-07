@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>¡Importado exitoso!</title>
+    <link rel="stylesheet" href="static\styles\resultado-error.css">
+</head>
+<body>
+    <form method="POST" enctype="multipart/form-data">
+        <h1>{{ mensaje }}</h1>
+        <div class="btns">
+            <a href="/cargar_archivo_productos">
+                <input class="btn_import" type="button" value="Importar de nuevo" onclick="window.location.href='/principal';">                
+            </a>
+            <input class="btn_regresar" type="button" value="Regresar" onclick="window.location.href='/principal';">
+        </div>
+    </form>
+</body>
+</html>
+{% endblock %}

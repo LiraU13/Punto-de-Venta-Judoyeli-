@@ -1,0 +1,6 @@
+flask
+bcrypt
+pandas
+reportlab
+openpyxl
+gunicorn

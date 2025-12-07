@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error</title>
+    <link rel="stylesheet" href="static\styles\resultado-error.css">
+</head>
+<body>
+    <form method="POST" enctype="multipart/form-data">
+        <h1>Error: {{ mensaje }}</h1>
+        <div class="btns">
+            <a href="/cargar_archivo_categorias">
+                <input class="btn_import" type="button" value="Intentar de nuevo" onclick="window.location.href='/principal';">                
+            </a>
+            <input class="btn_regresar" type="button" value="Cancelar" onclick="window.location.href='/principal';">
+        </div>
+    </form>
+</body>
+</html>
+{% endblock %}
