@@ -130,6 +130,10 @@
         </div>
         {% endif %}
     </div>
+    <!-- Renderizar script si existe -->
+    {% if script %}
+        {{ script|safe }}
+    {% endif %}
 </body>
 </html>
 {% endblock %}

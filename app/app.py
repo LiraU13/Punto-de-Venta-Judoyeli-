@@ -498,7 +498,10 @@ def generar_reporte_ventas():
                 productos_vendidos = f"{venta[1]} ({venta[2]} Kg a ${venta[3]:.2f} )"
                 
                 total_venta = venta[3]
-                fecha = venta[4].strftime('%Y-%m-%d %H:%M:%S')  # Formatear la fecha
+                if isinstance(venta[4], str):
+                    fecha = venta[4]
+                else:
+                    fecha = venta[4].strftime('%Y-%m-%d %H:%M:%S')  # Formatear la fecha
             elif venta[0] == venta_actual:
                 productos_vendidos += f"\n{venta[1]} ({venta[2]} Kg a ${venta[3]:.2f} )"
                 
@@ -509,7 +512,10 @@ def generar_reporte_ventas():
                 productos_vendidos = f"{venta[1]} ({venta[2]} Kg a ${venta[3]:.2f} )"
                 
                 total_venta = venta[3]
-                fecha = venta[4].strftime('%Y-%m-%d %H:%M:%S')  # Formatear la fecha
+                if isinstance(venta[4], str):
+                    fecha = venta[4]
+                else:
+                    fecha = venta[4].strftime('%Y-%m-%d %H:%M:%S')  # Formatear la fecha
 
         # Agregar la última venta a la tabla
         data.append((venta_actual, productos_vendidos, f"${total_venta:.2f}", fecha))
