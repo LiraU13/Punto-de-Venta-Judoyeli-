@@ -49,7 +49,16 @@ def encrypt_passwords():
         original_password_hash = usuario[1]
 
         # Verificar si la contraseña ya está encriptada (si contiene el prefijo '$2b$')
-        if not original_password_hash.startswith('$2b$'):
+        is_encrypted = False
+        if isinstance(original_password_hash, bytes):
+            if original_password_hash.startswith(b'$2b$'):
+                is_encrypted = True
+            original_password_hash = original_password_hash.decode('utf-8') # Convert to string for logic
+        elif isinstance(original_password_hash, str):
+             if original_password_hash.startswith('$2b$'):
+                is_encrypted = True
+        
+        if not is_encrypted:
             # Encriptar la contraseña original utilizando bcrypt
             encrypted_password_hash = bcrypt.hashpw(original_password_hash.encode('utf-8'), bcrypt.gensalt())
 
@@ -72,7 +81,13 @@ def login():
         g.cursor.execute("SELECT id, nombre_usuario, contrasena FROM usuario WHERE nombre_usuario = ?", (username,))
         user = g.cursor.fetchone()
 
-        if user and bcrypt.checkpw(password.encode('utf-8'), user[2].encode('utf-8')):
+        if user:
+            stored_password = user[2]
+            # Ensure stored_password is bytes for bcrypt
+            if isinstance(stored_password, str):
+                stored_password = stored_password.encode('utf-8')
+            
+            if bcrypt.checkpw(password.encode('utf-8'), stored_password):
             # Iniciar sesión almacenando el ID y nombre del usuario en la sesión
             session['user_id'] = user[0]
             session['nombre_usuario'] = user[1]
