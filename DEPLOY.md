@@ -77,13 +77,18 @@ Ejecuta los siguientes comandos uno por uno:
     - **Branch**: `main`.
     - **Runtime**: **Python 3**.
     - **Build Command**: `pip install -r requirements.txt`
-    - **Start Command**: `gunicorn --chdir app app:app`
+    - **Start Command**: `python -m gunicorn --chdir app app:app`
 6.  Baja y selecciona el plan **"Free"**.
 7.  Dale a **"Create Web Service"**.
 
-## 4. ¡Listo!
+## 4. Solución de Problemas (Troubleshooting)
 
-Render tardará unos minutos en construir tu sitio. Cuando termine, verás un enlace arriba a la izquierda (ej: `https://portfolio-judoyeli-demo.onrender.com`).
+Si ves un error como `bash: gunicorn: command not found` o fallos en el "Start Command":
+
+1.  **Verificar Build**: Asegúrate de que el **Build Command** corrió correctamente (`pip install -r requirements.txt`).
+2.  **Cambiar Start Command**: En los ajustes de Render (Settings), cambia el Start Command por:
+    `python -m gunicorn --chdir app app:app`
+    _(Esto asegura que se use el gunicorn instalado por python)_
 
 **Credenciales de Acceso (Datos Falsos):**
 
