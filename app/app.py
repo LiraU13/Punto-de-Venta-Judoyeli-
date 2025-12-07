@@ -88,10 +88,12 @@ def login():
                 stored_password = stored_password.encode('utf-8')
             
             if bcrypt.checkpw(password.encode('utf-8'), stored_password):
-            # Iniciar sesión almacenando el ID y nombre del usuario en la sesión
-            session['user_id'] = user[0]
-            session['nombre_usuario'] = user[1]
-            return redirect('/principal')
+                # Iniciar sesión almacenando el ID y nombre del usuario en la sesión
+                session['user_id'] = user[0]
+                session['nombre_usuario'] = user[1]
+                return redirect('/principal')
+            else:
+                 error_message = 'Usuario y/o contraseña incorrectos. Verifica e inténtelo de nuevo.'
         else:
             error_message = 'Usuario y/o contraseña incorrectos. Verifica e inténtelo de nuevo.'
 
