@@ -1,65 +1,88 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static\styles\style_is.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="static\styles\style_is.css" />
     <title>Iniciar sesión</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <form action="/" method="POST">
-        <h1>Inicia sesión</h1>
-        <div class="data">
-            <input class="fill-text" type="text" placeholder="Usuario" name="username" id="username" required>
-            <input class="fill-text" type="password" placeholder="Contraseña" name="password" id="password" required>
-        </div>
-        <label class="tyc">
-            <a class="txt" href="{{ url_for('terminos_condiciones') }}">Acepto los términos y condiciones.</a>
-            <input class="check-tyc" type="checkbox" required>
-        </label>
-        <button type="submit">Iniciar sesión</button>
+      <h1>Inicia sesión</h1>
+      <div class="data">
+        <input
+          class="fill-text"
+          type="text"
+          placeholder="Usuario"
+          name="username"
+          id="username"
+          value="admin"
+          required
+        />
+        <input
+          class="fill-text"
+          type="password"
+          placeholder="Contraseña"
+          name="password"
+          id="password"
+          value="admin"
+          required
+        />
+      </div>
+      <label class="tyc">
+        <a class="txt" href="{{ url_for('terminos_condiciones') }}"
+          >Acepto los términos y condiciones.</a
+        >
+        <input class="check-tyc" type="checkbox" required />
+      </label>
+      <button type="submit">Iniciar sesión</button>
 
-        <div aria-label="Orange and tan hamster running in a metal wheel" role="img" class="wheel-and-hamster">
-            <div class="wheel"></div>
-            <div class="hamster">
-                <div class="hamster__body">
-                    <div class="hamster__head">
-                        <div class="hamster__ear"></div>
-                        <div class="hamster__eye"></div>
-                        <div class="hamster__nose"></div>
-                    </div>
-                    <div class="hamster__limb hamster__limb--fr"></div>
-                    <div class="hamster__limb hamster__limb--fl"></div>
-                    <div class="hamster__limb hamster__limb--br"></div>
-                    <div class="hamster__limb hamster__limb--bl"></div>
-                    <div class="hamster__tail"></div>
-                </div>
+      <div
+        aria-label="Orange and tan hamster running in a metal wheel"
+        role="img"
+        class="wheel-and-hamster"
+      >
+        <div class="wheel"></div>
+        <div class="hamster">
+          <div class="hamster__body">
+            <div class="hamster__head">
+              <div class="hamster__ear"></div>
+              <div class="hamster__eye"></div>
+              <div class="hamster__nose"></div>
             </div>
-            <div class="spoke"></div>
+            <div class="hamster__limb hamster__limb--fr"></div>
+            <div class="hamster__limb hamster__limb--fl"></div>
+            <div class="hamster__limb hamster__limb--br"></div>
+            <div class="hamster__limb hamster__limb--bl"></div>
+            <div class="hamster__tail"></div>
+          </div>
         </div>
+        <div class="spoke"></div>
+      </div>
 
-        <!-- Mostrar el mensaje de error si existe -->
-        {% if error_message %}
-        <p class="error-message">{{ error_message }}</p>
-        {% endif %}
+      <!-- Mostrar el mensaje de error si existe -->
+      {% if error_message %}
+      <p class="error-message">{{ error_message }}</p>
+      {% endif %}
     </form>
-</body>
+  </body>
 
-<script>
+  <script>
     window.onload = function () {
-        if (typeof history.pushState === "function") {
-            history.pushState(null, null, location.href);
-            window.onpopstate = function () {
-                history.go(1);
-            };
-        }
+      if (typeof history.pushState === "function") {
+        history.pushState(null, null, location.href);
+        window.onpopstate = function () {
+          history.go(1);
+        };
+      }
     };
-</script>
-
+  </script>
 </html>
